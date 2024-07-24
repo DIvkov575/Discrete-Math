@@ -119,5 +119,63 @@ For each of the following propositions, if it is a tautology or it is unsatisfia
 \end{problem}
 \pagebreak
 
+%4
+\begin{problem}
+    Consider a proposition of $n$ variables. Here is an algorithm for checking for satisfiability: Generate a truth table for the proposition. Check if all lines of the truth table are false. If not, the proposition is satisfiable. Why is this algorithm exponentially costly?
+    \begin{solution}
+        As each new variable is added the cases which need to be covered grows 2 fold, such that the number of cases/rows that need to be added to the table can be modelled by $2^n$. This makes the algorithm's cost exponential because it is executed on an exponentially growing input.
+        $\binom{2}{1}^n = 2^n$
+    \end{solution}
+\end{problem}
+\pagebreak
+
+%5
+\begin{problem}
+{\bf THIS PROBLEM SHOULD BE SUBMITTED IN CARNAP. ONLY ANSWERS SUBMITTED IN CARNAP WILL BE ACCEPTED. }
+
+    Convert the following proposition to DNF with a justification for each step: $(P \to Q) \land (\neg(Q \vee \neg R) \lor (P \land \neg S))$ \\
+
+    \begin{solution}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{solution-6.png}
+        \end{figure}
+    \end{solution}
+\end{problem}
+\pagebreak
+
+%6
+\begin{problem}
+    Consider the formula:
+
+    $(p_1 \land q_1) \lor (p_2 \land q_2) \lor \ldots \lor (p_n \land q_n)$
+
+    where $n \geq 2$ and the $p_i$ and $q_i$ are propositional variables. This proposition has $n$ clauses and length $4n - 1$ if we count each propositional variable and operator as adding 1 to the length and we ignore the parentheses.
+
+    \subproblem First, write the CNF version of the proposition when $n = 2$. Give a justification for each step.  {\bf THIS SUBPROBLEM SHOULD BE SUBMITTED IN CARNAP. ONLY ANSWERS SUBMITTED IN CARNAP WILL BE GRADED. }
+    \subproblem When you distribute the and over the or, what happens to the number of clauses?
+    \subproblem How long is your conjunctive normal form of this formula, using the same conventions as in the problem statement?
+    \subproblem For general $n$, how many clauses are in the conjunctive normal form as a function of $n$? How long is it?
+
+    \begin{solution}
+    (A) \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{problem7.png}
+    \end{figure}
+    (B) The number of clauses doubles \\
+    (C) The CNF contains 4 clauses. (Sorry, Im not sure what is meant by "same conventions as in the problem statement")\\
+    (D) $n^2$ where $n$ is the number of clauses in the DNF version.
+    \end{solution}
+\end{problem}
+\pagebreak
+
+
+%7
+\begin{problem}
+    Consider the following algorithm for checking satisfiability: Put the formula into disjunctive normal form and then check to see if all of the disjuncts are contradictions (containing both a variable and its complement). If not, then it is satisfiable. Why is this algorithm exponentially costly?
+    \begin{solution}
+        In the process of building the disjunctive formula, we are forced to consider both the variable and its negation when creating conjunctions. As a result we are forced to consider two possibilities per variable, with n variables, which causes the complexity of our equation to grow at a rate of approximately $2^n$ where n represent the number of variables. An example of this would be in the distributing of $\land$ over $\lor$ operators (when converting from a "CNF-esque" form of the formula), causing the number of terms to grow exponentially.
+    \end{solution}
+\end{problem}
 
 \end{document}
