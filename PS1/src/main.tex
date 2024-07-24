@@ -1,0 +1,123 @@
+\documentclass[solution,letterpaper]{cs20}
+\usepackage{enumerate}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{hyperref}
+\usepackage{fitch}
+
+\begin{document}
+
+\header{1}{Propositional Logic Equivalences and Normal Forms}
+
+
+%1
+\begin{problem}
+A half dozen different operators may appear in propositional formulas, but just
+$\wedge$, $\vee$, and $\neg$ are enough to express every proposition. That is because each of the operators
+is equivalent to a simple formula using only these three operators. For example,
+$A \rightarrow B$ is equivalent to $\neg A \vee B$. So all occurrences of $\rightarrow$ in a
+formula can be replaced using just $\neg$ and $\vee$.
+
+We already know that $A \iff B$ is equivalent to $(A \land B) \lor (\neg A \land \neg B)$ and $A \oplus B$ is equivalent to $(A \land \neg B) \lor (\neg A \land \neg B)$ by definition. 
+
+\subproblem Prove that we don’t even need $\wedge$, that is, write a proposition using {\bf only} $\vee$ and $\neg$ that is equivalent to $A \wedge B$. Prove your answer. \\ \\
+In parts B and C you will prove that we can get by with the single operator $\textsc{Nand}$. $\textsc{Nand}$ is written $\uparrow$, and is defined as $\neg(A \wedge B)$. To prove we only need $\uparrow$, all you need to do is construct propositions using \emph{only} $\uparrow$ that are logically equivalent to $\neg A$ and $A \vee B$. Nota bene: Because $\textsc{Nand}$ is both sufficient and easy to build in a digital circuit, in practice it is often actually the case that $\textsc{Nand}$ is the only operator. 
+
+\subproblem For this part, write a proposition using only $\uparrow$ and $A$ that is equivalent to $\neg A$. Prove the equivalence of your proposition. 
+\subproblem For this part, write a proposition using only $\uparrow$ that is equivalent to $A \vee B$. Prove the equivalence. 
+
+
+\begin{solution}
+    (A) \\
+    $A \land B$ can be expressed without using the $\land$ logical connective as $\neg (\neg A \lor \neg B)$. This is proven by the truth table constructed below, which demonstrates identical truth values in the columns representing $A \land B$ and $\neg (\neg A \lor \neg B)$.
+
+    \begin{tabular}{c|c|c|c|c|c|}
+        A & B & $\neg A$ & $\neg B$ & $\neg (\neg A \lor \neg A)$ & $A \land B$ \\
+        T & T & F & F & T & T  \\
+        T & F & F & T & F & F  \\
+        F & T & T & F & F & F  \\ 
+        F & F & F & T & F & F  \\
+    \end{tabular}
+    \label{tab:my_label} \\ 
+
+    (B) \\ 
+    $A \uparrow B$ is equivalent to $\neg A$. The equivalence chain below proves their equivalence. \\ 
+    $A \uparrow B \equiv \neg(A \land B)$  \\
+    $A \uparrow A \equiv \neg(A \land A)$ \\
+    $A \uparrow A \equiv \neg(A)$ \\
+    $A \uparrow A \equiv \neg A$ \\
+    
+    (C) Equivalence chain proves equivalence between $A \uparrow B$ and $\neg (\neg A \land \neg B)$\\
+    $A \uparrow B \equiv \neg(A \land B)$ \\
+    $A \uparrow B \equiv \neg A \lor \neg B$ :                                      DeMorgan's law \\
+    $(A \uparrow A) \uparrow B \equiv \neg \neg A \lor \neg B$ :                    equivalence $(A \uparrow A \equiv \neg A)$ proven in part 1B \\
+    $(A \uparrow A) \uparrow (B \uparrow B) \equiv \neg \neg A \lor \neg \neg B$ :  equivalence $(A \uparrow A \equiv \neg A)$ proven in part 1B \\
+    $(A \uparrow A) \uparrow (B \uparrow B) \equiv A \lor B$ :                      double negation \\
+\end{solution}
+\end{problem}
+
+%2
+\begin{problem}
+Let $x$ and $y$ be fixed (but unknown) integers. Let $z = x * y$. Let $P$ =``$x$ is even'', $Q$ = ``$y$ is even'', and $R$ = ``$z$ is even''. \\
+
+\noindent Translate the following sentences to propositional logic: 
+
+\subproblem If the product of $x$ and $y$ is even, then at least one of $x$ and $y$ is even
+\subproblem $z$ is even, but $x$ is odd
+\subproblem $z$ is even if $x$ is even
+\subproblem $z$ is even only if $x$ and $y$ are even
+\subproblem $z$ is odd unless $x$ or $y$ is even
+\subproblem For each of the above propositions, determine whether it is true or false or whether it depends on the values of $x$, $y$, and $z$.
+
+\begin{solution}
+(A) $R \to P \lor Q$ : True\\
+(B) $R \land \neg P$ : depends on variables\\
+(C) $P \to R$ : True \\
+(D) $R \leftrightarrow P \land Q$ : False\\
+(E) $\neg (P \lor Q) \to \neg R$ : True\\
+\end{solution}
+\end{problem}
+\pagebreak
+
+%3
+\begin{problem}
+For each of the following propositions, if it is a tautology or it is unsatisfiable, prove it with a truth table. If it is satisfiable, identify a satisfying assignment. 
+\subproblem $(P \vee Q) \vee (Q \to P)$ 
+\subproblem $(P \to Q) \to P$
+\subproblem $P \to (Q \to P)$
+
+\begin{solution}
+(A) Satisfiable by (P:T, Q:T) \& (P:T, Q:F) \\
+\begin{tabular}{c|c|c|c|c|}
+    P & Q & $(P \lor Q)$ & $(Q \to P)$ & $(P \lor Q) \land (Q \to P)$\\
+    T & T & T & T & T\\
+    T & F & T & T & T\\
+    F & T & T & F & F\\
+    F & F & F & T & F\\
+\end{tabular}
+\label{tab:my_label} \\
+
+(B) Satisfiable by (P:T, Q:T) \& (P:T, Q:F) \\
+\begin{tabular}{c|c|c|c|}
+    P & Q & $(P \to Q)$ & $(P \to Q) \to P$ \\
+    T & T & T & T \\
+    T & F & F & T \\
+    F & T & T & F \\ 
+    F & F & T & F \\
+\end{tabular} \\
+
+(C) $(P \to (Q \to P)$ is a Tautology \\
+\begin{tabular}{c|c|c|c}
+     P & Q & $(Q \to P)$ & $(P \to (Q \to P)$ \\
+     T & T & T & T \\
+     T & F & T & T \\
+     F & T & F & T \\
+     F & F & T & T \\
+\end{tabular}
+\end{solution}
+\end{problem}
+\pagebreak
+
+
+\end{document}
