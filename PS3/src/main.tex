@@ -1,0 +1,95 @@
+
+\documentclass[solution,letterpaper]{cs20}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{amsmath}
+\usetikzlibrary{arrows,positioning,shapes,fit,calc}
+\begin{document}
+
+    \header{3}{Modular Arithmetic Sets Functions and Relations}
+
+
+    \begin{problem}
+        The sum of the digits of a positive integer number is
+        divisible by 9 if and only if the number is divisible by 9.  (So 234
+        and 567 are both divisible by 9.)  Prove this statement, by writing
+        it in terms of modular arithmetic.  Hint: think of an $n$-digit number
+        as a sequence of digits $d_n d_{n-1} \ldots d_2 d_1$.  Can you write that
+        number in terms of it digits in a useful way?
+
+        \begin{solution}
+            I will prove that the sum of the digits of a number is evenly divisible by 9 if and only if the number is also divisible by 9 through chains of equivalences which will show that the left hand and right hand side are equivalent to oneanother. In other words, given a number which can be represented as an enumerated sequence of its digits $d_i$ with a length of n, I will prove $\sum_{i=0}^{n-1}d_i \equiv_9 0 \iff \sum_{i=0}^{n-1} 10^{i}d_i \equiv_9 0$.\\
+
+            $\bold{Lemma 1. } {\forall k \in \mathbb{Z}^{+}. 10^k \in [1]_9}$ \\
+            $10^n = 1 + \sum_{i = 0}^{n-1} 10^{i}9$ \\
+            $(10^n) \mod 9 = (1 + \sum_{i = 0}^{n-1} 10^{i}9) \mod 9$ \\
+            $\sum_{i = 0}^{n-1} 10^{i}9 = 9k; k \in \mathbb{Z} \because$ the summation is just a repeated addition (multiple) of 9 \\
+            $10^n \mod 9 = 9k + 1 \mod 9$ \\
+            $10^n \mod 9 = 1$ \\
+
+            $\sum_{i=0}^{n-1} 10^{i}d_i \equiv_9 0 \iff \sum_{i=0}^{n-1}d_i \equiv_9 0$\\
+            $10^i$ can be replaced with the equivalent expression $((\sum_{k=0}^{i-1}10^{k}9) + 1)$ \\
+            $\sum_{i=0}^{n-1} (\sum_{k = 0}^{i-1} (10^{k}9) + 1)d_i \equiv_9 0 \iff \sum_{i=0}^{n-1}d_i \equiv_9 0$ \\
+            $\sum_{i=0}^{n-1}( d_{i}\sum_{k = 0}^{i-1} (10^{k}9) + d_i) \equiv_9 0 \iff \sum_{i=0}^{n-1}d_i \equiv_9 0$ \\
+            $\sum_{i=0}^{n-1}( d_{i}\sum_{k = 0}^{i-1}(10^{k}9))  + \sum_{i=0}^{n-1} d_i \equiv_9 0 \iff \sum_{i=0}^{n-1}d_i \equiv_9 0$ \\
+            $[\sum_{i=0}^{n-1}( d_{i}\sum_{k = 0}^{i-1}10^{k}9) \mod 9 + \sum_{i=0}^{n-1} d_i \mod 9] \mod 9 = 0 \iff \sum_{i=0}^{n-1}d_i \equiv_9 0$ \\
+            The summations of $10^{k}9$ which occurs on the left hand side can be simplified to $9n$ where ${n \in \mathbb{Z}}$ because it is just a repeating sum of '9'. \\
+            $[n9 \mod 9 + \sum_{i=0}^{n-1} d_i \mod 9] = 0 \iff \sum_{i=0}^{n-1}d_i \equiv_9 0$ \\
+            $[0 + \sum_{i=0}^{n-1} d_i \mod 9] = 0 \iff \sum_{i=0}^{n-1}d_i \equiv_9 0$ \\
+            $\sum_{i=0}^{n-1}d_i \equiv_9 0 \iff \sum_{i=0}^{n-1}d_i \equiv_9 0$ \\
+
+            In conclusion, the sum of the digits of a number are divisible by 9 if and only if the number is also divisible by 9, because through chains of equivalences on a numerical representation of the claim the propositions where shown to be equivalent. QED.
+        \end{solution}
+    \end{problem}
+    \newpage
+
+    \begin{problem}
+        Use modular arithmetic to prove that the square of any integer is of the form $3k$ or $3k+1$.
+
+        \begin{solution}
+            $\mathbb{Z}_3 = \{[0], [1], [2]\}$ \\
+            I will prove the claim with 3 cases: when an integer squared is in the forms 3k, 3k+1, or 3k+2 \\
+
+            Case 1:  \\
+            let $n, k, m \in \mathbb{Z}$ \\
+            $n \equiv_3 0$ \\
+            $n = 3k$ : definition of modulus \\
+            $n^2 = 9k^2$ \\
+            $3*3k^2 \mod 3 = 3m \mod 3$ \\
+            $0 = 0$ \\
+            Through chains of equivalences, both sides turn out equivalent. \\
+
+            Case 2: \\
+            let $n, k_1, k_2 m \in \mathbb{Z}$ \\
+            $n \equiv_3 1$ \\
+            $n = 3k + 1$ : definition of modulus \\
+            $n^2 = 9k_1^2 + 6k_1 + 1$ \\
+            $3(3k_1^2 + 2k_1) + 1 \mod 3 = 3m + 1 \mod 3$ \\
+            let $k_2 := (3k_1^2 + 2k_1)$
+            $3k_2 + 1 \mod 3 = 3m + 1 \mod 3$
+            $1 = 1$ \\
+            Through chains of equivalences, both sides turn out equivalent. \\
+
+
+            Case 3: \\
+            let $n, k_1, k_2 m \in \mathbb{Z}$ \\
+            $n \equiv_3 2$ \\
+            $n = 3k + 2$ : definition of modulus \\
+            $n^2 = 9k_1^2 + 12k_1 + 4$ \\
+            $3(3k_1^2 + 4k_1 + 1) + 1 \mod 3 = 3m + 2 \mod 3$ \\
+            let $k_2 := (3k_1^2 + 4k_1 + 1)$
+            $3k_2 + 1 \mod 3 = 3m + 2 \mod 3$
+            $1 \neq 2$ \\
+            Through chains of equivalences, both turn out in-equal. \\
+
+            In conclusion, by splitting the domain of integers into groupings/classes ([0], [1], [2]) we can test each as cases through chains of equivalences. After testing each case, it was determined that squared integers could only be represented in the forms 3k or 3k+1 where k is an integer. QED.
+
+
+        \end{solution}
+    \end{problem}
+    \newpage
+
+\end{document}
