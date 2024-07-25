@@ -92,4 +92,74 @@
     \end{problem}
     \newpage
 
+    \begin{problem}
+        When is $|P(A \cup B)| = |P(A)| \cdot |P(B)|$?
+        Give a case when they are not equal.
+        Determine an expression for the ratio $\frac{|P(A \cup B)|}{|P(A)| \cdot |P(B)|}$ and explain why it is correct.
+
+        \begin{solution}
+            $\sum_{k=0}^{n} {n \choose k} = 2^n$ \\
+            The cardinality of a powerset of a set is equal to $2^n$ where $n$ is the number of elements in the set. Therefore the original equation can be rewritten as $2^{A \cup B} =  2^{| A |} * 2^{|B|}$ or $2^{|A \cup B|} = 2^{|A| + |B|}$ or $|A \cup B| = |A| + |B|$
+            $|P(A \cup B)| = |P(A)| \cdot |P(B)|$ can be expected to hold true when $|A \cup B| = |A| + |B|$. \\
+
+            A case when they $|P(A \cup B)|$ would not equal $|P(A)| \cdot |P(B)|$ would be when $A := {1, 2}$ and $B:= {1,4}$ such that $\vert P(A) \vert = 4; \vert P(B) \vert = 4; \vert P(A \cup B) \vert = 8; |P(A)|*|P(B)| = 16 $
+
+            $\frac{|P(A \cup B)|}{|P(A)| \cdot |P(B)|}$ \\
+            $\frac{2^{|A \cup B|}}{2^{|A| + |B|}}$ : replace $|P(A \cup B)|$ and $|P(A)| \cdot |P(B)|$ with alternative forms determined above \\
+            $2^{|A \cup B| - |A| - |B|}$ : exponent rules \\
+
+            $\frac{|P(A \cup B)|}{|P(A)| \cdot |P(B)|} = 2^{|A \cup B| - |A| - |B|}$ the ratio represents the how the number of elements in the union of  A and  B differs from the total count of elements in  A and  B if there were no overlap.
+        \end{solution}
+    \end{problem}
+    \newpage
+
+    \begin{problem}
+        Is it always true that for two (finite) sets $A$ and $B$ that  $(A - B) \cap (B - A) = \emptyset$?
+        Prove it or give a counterexample.
+
+
+        \begin{solution}
+            I will prove that for any two finite sets $A$ and $B$ that  $(A - B) \cap (B - A) = \emptyset$, by re-expressing $(A - B) \cap (B - A) = \emptyset$ through chains of equivalences until it is equivalent to $\emptyset$ \\
+
+            $(A - B) \cap (B - A) = \emptyset$ \\
+            $(A \cap \bar{B}) \cap (B \cap \bar{A}) = \emptyset$  $ \because A - B = A \cap \bar{B}$ \\
+            $(A \cap \bar{A}) \cap (B \cap \bar{A}) = \emptyset$ : associative property \\
+            $\emptyset \cap \emptyset = \emptyset$ : $S \cap \bar{S}$ is null because it is the intersection of a set and its complement (everything but the contents of the set) \\
+
+            In conclusion, It is true that for two finite sets $A$ and $B$ that  $(A - B) \cap (B - A) = \emptyset$, because after expressing sufficient chains of equivalences $(A \cap \bar{A}) \cap (B \cap \bar{A}) = \emptyset$ is achieved. Here, you take the intersection of $A$ and $\bar{A}$ ie everything in $A$ and everything not it $A$: which will always result in a null set. Proving that $(A - B) \cap (B - A)$ is equivalent to $\emptyset$. QED.
+        \end{solution}
+    \end{problem}
+    \newpage
+
+    \begin{problem}
+        Let $g : \mathbb{Z} \rightarrow \mathbb{Z}$ be an injective function. Define $f : (\mathbb{Z}\times\mathbb{Z}) \rightarrow (\mathbb{Z}\times\mathbb{Z})$ such that $f(x,y) = (g(x) + g(y), g(x) - g(y))$. Prove that $f$ is also injective.
+
+        \begin{solution}
+            Injective function definition: $\forall a,b \in A. (f(a) = f(b)) \to (a = b)$ where A is function f's domain \\
+            We will need to prove that $\forall x_1, y_1, x_2, y_1 \in \mathbb{Z}. [f(x_1, y_1) = f(x_2, y_2)] \to [x_1 = x_2 \land y_1 = y_2] $ \\
+
+            let $x_1, y_1, x_2, y_1 \in \mathbb{Z}$ \\
+            The function f can be split into two separate functions/relations. According to our multivariate interpretation of hte injective function definition, the following must be true.\\
+            $g(x_1) + g(y_1) = g(x_2) + g(y_2)$ \\
+            $g(x_1) - g(y_1) = g(x_2) - g(y_2)$ \\
+
+            If we add the equivalences, we can isolate and compare g(x) \\
+            $ (g(x_1) + g(y_1)) + (g(x_1) - g(y_1)) = (g(x_2) + g(y_2)) + (g(x_2) - g(y_2)) $ \\
+            $ 2g(x_1) = 2g(x_2) $ \\
+            $ g(x_1) = g(x_2) $ \\
+            since g(x) is injective (meaning each output will only have 1 unique input), we can disregard with $g(x_1) = g(x_2)$ impying $x_1 = x_2$ \\
+
+            If we add the equivalences, we can isolate and compare g(y)
+            $(g(x_1) + g(y_1)) - (g(x_1) - g(y_1)) = (g(x_2) + g(y_2)) - (g(x_2) - g(y_2)) $ \\
+            $2g(y_1) = 2g(y_2) $ \\
+            $g(y_1) = g(y_2) $ \\
+            since g(y) is injective (meaning each output will only have 1 unique input), we can disregard with $g(y_1) = g(y_2)$ impying $y_1 = y_2$ \\
+
+            By manipulating our function with chains of equivalences, and making use of f's composition of the known injective function g(x), we were able to compare the inputs and check whether or not the same output can result from two diferent inputs. QED.
+
+
+
+        \end{solution}
+    \end{problem}
+
 \end{document}
