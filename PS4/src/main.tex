@@ -1,0 +1,49 @@
+
+\documentclass[solution,letterpaper]{cs20}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{hyperref}
+\usepackage{circuitikz}
+\usepackage{caption}
+\usetikzlibrary{arrows,positioning,shapes,fit,calc}
+\begin{document}
+    \header{4}{Proof by Contradiction The Pigeonhole Principle Countability}
+
+
+    \begin{problem}
+        Show that for every integer $n>2$ there is a prime between $n$ and $n! = 1\cdot 2\cdots(n-1)\cdot n$. (Hint: look for prime factors of $n!-1$.)
+
+        \begin{solution}
+            We will prove the claim via contraposition by assuming that (n! - 1) cannot be a prime but must a composite integer. \\
+            Since (n! - 1) is a composite it must contain a factor, so let $a \in \mathbb{N}$ where $n < a$ and $2 < n$ such that $a \vert (n! - 1)$. \\
+            $a \vert n!$ (because  $a \leq n$) and $a \vert (n! - 1)$, a must also be a factor of 1 $\therefore$  a must equal 1. \\
+            This forms a contradiction because a which is supposed to be a prime number turns out to be equal to 1, which is betrays one of the conditions for prime numbers. If 'a' was to be equal to 1, forcing (n! - 1) to be prime. QED.
+        \end{solution}
+    \end{problem}
+    \newpage
+
+    \begin{problem}
+        \bigskip
+        Prove by contradiction that $\sqrt{3} + \sqrt{2}$ is irrational. \emph{Hint:} Consider $(\sqrt{3} + \sqrt{2})(\sqrt{3} - \sqrt{2})$
+
+        \begin{solution}
+            W will prove that $\sqrt{3} + \sqrt{2}$ is irrational by contradiction. Assume $\sqrt{3} + \sqrt{2}$ is rational. \\
+
+            $\sqrt{2}$ and $\sqrt{3}$ are known irrational numbers.
+            let $p, q \in \mathbb{Z}$ where $q \neq 0; GCD(p, q) = 1; $ such that $(\sqrt{3} + \sqrt{2}) = \frac{p}{q}$ \\
+            if $p/q = (\sqrt{3} + \sqrt{2})$ and $(\sqrt{3} + \sqrt{2})(\sqrt{3} - \sqrt{2}) = 1$ then $(\sqrt{3} - \sqrt{2}) = \frac{q}{p}$ and $(\sqrt{3} - \sqrt{2}) = \frac{q}{p}$ is a rational number too. \\
+
+            $\frac{p}{q} + \frac{q}{p} = (\sqrt{3} + \sqrt{2}) + (\sqrt{3} - \sqrt{2}) $ \\
+            $\frac{p^2}{qp} + \frac{q^2}{pq} = 2\sqrt{3}$ \\
+            $\frac{p^2 + q^2}{pq} = 2\sqrt{3}$ \\
+            let $m, n \in \mathbb{Z}$ such that $m = p^2 + q^2$ and $n = pq$ due to the closure properties of integers \\
+            $\frac{m}{n} = 2\sqrt{3}$ \\
+            let $r \in \mathbb{R}$ such that $r = \frac{m}{n}$\\
+            $r = 2\sqrt{3}$ \\
+
+            After subtracting two expressions (assumed to be rational), and drawing chains of equivalences a contradiction appears when the product of the numbers we assumed to be rational is 'equal' to an irrational number $2 * \sqrt{3}$ (a number know to be irrational).
+        \end{solution}
+    \end{problem}
+    \newpage
+\end{document}
