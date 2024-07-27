@@ -1,0 +1,111 @@
+
+\documentclass[solution,letterpaper]{cs20}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{qtree}
+\usepackage{multicol}
+
+\begin{document}
+
+    \header{7}{Structural Induction  Series Recurrence Relations }
+
+
+    \begin{problem}
+
+        A set $S$ is defined by the following rules:
+        \begin{itemize}
+            \item Base case: $(0,1) \in S$.
+            \item Constructor Rule: If $(x,y) \in S$, then $(x+1,y+2x+3) \in S$.
+        \end{itemize}
+
+        (a) Starting with $(0,1)$, write out the pairs that follow by applying
+        the constructor rule five times.
+
+        (b) Based on part (a), give a conjecture about the relationship that holds between the first and second
+        coordinates of all pairs in $S$.
+
+        (c) Use structural induction to prove that your conjectured relationship holds for all pairs in $S$.
+
+        \begin{solution}
+        (A) \\
+        $(0,1) \to (1,4) \to (2, 9) \to (3, 16) \to (4, 25) \to (5, 36)$ \\
+
+        (B) \\
+        $\forall (x, y) \in S. x+1)^2 = y$
+
+        (C) \\
+        Let us prove that every number in S is in the form $(x, x^2)$ by structural induction.\\
+        \textbf{Base Case} (0,1)\\
+        \( (x + 1)^2 = y \) \\
+        \( (0 + 1)^2 = 1 \) \\
+        Base case holds since \( y = 1 \).\\
+
+        \textbf{Inductive Hypothesis}
+        Assume the relationship holds for an arbitrary pair \( (x, y) \in S \). That is, assume \( y = (x + 1)^2 \).\\
+
+        \textbf{Inductive Step} \\
+        Given our inductive hypothesis, we begin with a starting state $(n, (n+1)^2)$ If we apply the one and only constructor rule we get our inductino state which would be $(n+1, (n+1)^2 + 2n + 3)$. To prove our hypothesis is true we must show that $(n+1)^2 + 2n + 3 = (n+2)^2$. \\
+        $(n+2)^2 = (n+1)^2 + 2n + 3$ \\
+        $(n+2)^2 = n^2 +2n + 1 + 2n + 3$ \\
+        $(n+2)^2 = n^2 +4n +4 $ \\
+        $(n+2)^2 = (n+2)^2$  \\
+        We have shown that the $(x+1)^2 = y$ holds for all states in states in the structure, by showing it holds true for the one and only constructor case.
+
+        \textbf{Conclusion} \\
+        By structural induction, we have shown that for all \( (x, y) \in S \), the relationship \( y = (x + 1)^2 \) holds for all states in the structure.
+        \end{solution}
+    \end{problem}
+    \newpage
+
+    \begin{problem}
+        The reflection $Ref(T)$ of a rooted binary tree $T$ (where
+        the nodes are labelled) is defined as follows.
+        The reflection of a tree $T$ that is a single root node is $T$.
+        The reflection of a tree $T = (root,L,R)$ where $L$
+        and $R$ are the left and right subtrees of $T$ is
+        $Ref(T) = (root,Ref(R),Ref(L))$.
+
+        \subproblem Find the reflection of the tree below.\\
+
+        \includegraphics[width=2.5in]{original_tree}
+
+        \subproblem Prove using structural induction that the reflection of the reflection of a tree is the original tree.
+
+        \begin{solution}
+        (A) \\
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.5\linewidth]{IMG_4088 2.JPG}
+            \label{fig:enter-label}
+        \end{figure}
+
+        (B) \\
+        Let us prove that the reflection of the reflection of a tree is the original tree with structural induction. \\
+
+        \textbf{Base Case:} \\
+        Consider a tree with a single root node, \( T \). The reflection of \( T \) is itself, i.e., \(\text{Ref}(T) = T\). Applying the reflection operation again, we get \(\text{Ref}(\text{Ref}(T)) = \text{Ref}(T) = T\). Thus, the property holds for a single root node tree. \\
+
+        \textbf{Inductive hypothesis:} \\
+        Assume that Ref(Ref($T$)) = $T$ for k height trees \\
+
+        \textbf{Inductive Step:} \\
+        Consider a tree \( T \) of height \( k+1 \). \( T \) has a root node, and its left and right subtrees \( L \) and \( R \) are trees of height at most \( k \). We can write \( T \) as \( T = (\text{root}, L, R) \). \\
+
+        \(\text{Ref}(T) = (\text{root}, \text{Ref}(R), \text{Ref}(L))\) \\
+        \(\text{Ref}(\text{Ref}(T)) = \text{Ref}(\text{Ref}(\text{root}, \text{Ref}(\text{Ref}(R)), \text{Ref}(\text{Ref}(L)))\) \\
+
+        If we consider each of the k height subtrees $\text{Ref}(\text{Ref}(L))$ and $\text{Ref}(\text{Ref}(R))$, we can notice that these take the form of our hypothesis "Ref(Ref($T$)) = $T$ for k height trees". Therefore $\text{Ref}(\text{Ref}(L)) = L$ and $\text{Ref}(\text{Ref}(R)) = R$. \\
+
+        Therefore \(\text{Ref}(\text{Ref}(T)) = (\text{root}, \text{Ref}(\text{Ref}(L)), \text{Ref}(\text{Ref}(R)))\) is equivalent to \(\text{Ref}(\text{Ref}(T)) = (\text{root}, L, R)\)
+
+        \textbf{Conclusion:}
+        Thus, the property holds for trees of height \( k+1 \) if it holds for trees of height \( k \). By structural induction, we have shown that the reflection of the reflection of any rooted binary tree \( T \) is \( T \) itself.
+        \end{solution}
+    \end{problem}
+    \newpage
+
+
+\end{document}
