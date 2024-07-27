@@ -1,0 +1,162 @@
+\documentclass[solution,letterpaper]{cs20}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{float}
+\begin{document}
+    \header{5}{Induction Strong Induction}
+
+    \begin{problem}
+        Consider the following proof by induction:
+
+        Proof. Let $P(n)$ be the claim that $\sum\limits_{i = 1}^{n} f_i = f_{n+2} - 1$ where $f_n$ is the $n^{th}$ Fibonacci number. We show that $P(n)$ holds for all $n \in \mathbb{Z}_+$. \\
+
+        Base case: \textbf{A} \\
+
+        Inductive hypothesis: Let $k \in \mathbb{Z}$ be arbitrarily chosen and \textbf{B}. \\
+
+        Inductive step: Then
+
+        \begin{align*}
+            \sum\limits_{i = 1}^{k+1} f_i &= \sum\limits_{i = 1}^{k} f_i + f_{k+1} & \textbf{C} \\
+            &= f_{k+2} - 1 + f_{k+1} & \textbf{D} \\
+            &= f_{k+3} - 1 & \textrm{definition of Fibonacci sequence} \\
+        \end{align*}
+
+        Thus, $P(n)$ holds for $n = k + 1$, and the proof of the induction step is complete.
+        By the principle of induction, it follows that $P(n)$ is true for all $n \in \mathbb{Z}_+$.
+
+        \subproblem For what value(s) of $n$ are base cases needed? Justify your answer. You need not prove the base case(s).
+        \subproblem Complete the missing part of the inductive hypothesis indicated by \textbf{B}.
+        \subproblem What justification goes in location C?
+        \subproblem What justification goes in location D?
+        \begin{solution}
+        (A) \\
+        A base case is needed for values n = 1. Since we are doing a proof by induction, and an induction proof proves truth for all  propositions '$n+1$' ie. all propositions on values greater than the base case. So in order to prove that the proposition holds for all values of $\mathbb{Z}^+$, we must use include the smallest value of the domain $\mathbb{Z}^+ \geq 1$ as one of our base cases (n = 1). \\
+        (B) \\
+        The missing inductive hypothesis step would be the assumption that proposition for n is true ie. $\sum\limits^{k}_{i=1} f_i = f_{n+2} - 1$ \\
+        (C) \\
+        The justification would be summation rules that a sum $\sum\limits^{k+1}_{i=1} f_i$ can be split up into $\sum\limits_{i = 1}^{k} f_i$ and $f_{k+1}$. The reasoning for doing this would be to express the 'n+1' proposition in terms of the 'n' proposition (and "something else"), in order to express the relationship/interdependence such that when we assume the 'n' proposition to be true, we only need to prove the (hopefully simpler) "something else" component. \\
+        (D) \\
+        We replace $\sum\limits_{i = 1}^{k} f_i$ with its known (and assumed valid) definition as defined in the 'n' proposition $\sum_{i=1}^{k} f_i = f_{n+2} - 1$.
+        \end{solution}
+    \end{problem}
+
+    \newpage
+
+    \begin{problem}
+        Prove by induction that:
+
+        \[ \sum\limits_{i = 1}^n \frac{1}{i(i+1)} = \frac{n}{n+1} \]
+
+
+        \begin{solution}
+            Let us prove $\sum\limits_{i = 1}^n \frac{1}{i(i+1)} = \frac{n}{n+1}$ by induction. \\
+
+            \textbf{Base case} n=1 \\
+            $\sum_{i=1}^{1} \frac{1}{i(i + 1)} = \frac{1}{1(1 + 1)} = \frac{1}{2} $ \\
+            $\frac{n}{n + 1} \text{ for } n = 1 \text{ is } \frac{1}{1 + 1} = \frac{1}{2}$ \\
+            Both expressions evaluated to $\frac{1}{2}$ therefore both sides of the equation are equal and the claim holds true for n = 1 \\
+
+            \textbf{Inductive hypothesis} (k)\\
+            Lets assume that $\sum\limits_{i = 1}^k \frac{1}{i(i+1)} = \frac{k}{k+1}$ is true when proving our claim by induction \\
+
+            \textbf{Inductive step} (k+1) \\
+            $\sum_{i=1}^{k+1} \frac{1}{i(i + 1)} = \frac{k+1}{k+2}$\\
+
+            $\sum_{i=1}^{k+1} \frac{1}{i(i + 1)} = \sum_{i=1}^{k} \frac{1}{i(i + 1)} + \frac{1}{(k + 1)(k + 2)} $ : Split summation \\
+            $ \sum_{i=1}^{k+1} \frac{1}{i(i + 1)} = \frac{k}{k + 1} + \frac{1}{(k + 1)(k + 2)} $ :replace summation with equivalent expression (from inductive hypothesis) \\
+            $ \sum_{i=1}^{k+1} \frac{1}{i(i + 1)} = \frac{k}{k + 1} + \frac{1}{(k + 1)(k + 2)} $\\
+            $ \sum_{i=1}^{k+1} \frac{1}{i(i + 1)} =\frac{k(k + 2)}{(k + 1)(k + 2)} + \frac{1}{(k + 1)(k + 2)} $ \\
+            $ \sum_{i=1}^{k+1} \frac{1}{i(i + 1)} = \frac{k(k + 2) + 1}{(k + 1)(k + 2)} $ \\
+            $ \sum_{i=1}^{k+1} \frac{1}{i(i + 1)} = \frac{k^2 + 2k + 1}{(k + 1)(k + 2)}$ \\
+            $\sum_{i=1}^{k+1} \frac{1}{i(i + 1)} = \frac{k + 1}{k + 2}$ \\
+
+            \textbf{Conclusion:} By induction, we have shown that the props holds for \( n = 1 \) and that if it holds for \( n = k \), it also holds for \( n = k + 1 \). Therefore, by induction, the proposition is true for all \( n \geq 1 \) QED. \\
+        \end{solution}
+    \end{problem}
+
+    \newpage
+
+    \begin{problem}
+        Prove by induction that $2^n + 1$ is divisible by 3 for all odd integers $n$.
+
+        \begin{solution}
+            Let us prove by induction that $2^n + 1$ is divisible by 3 for all odd integers $n$ or
+            in other words $2^{2k + 1} + 1 = 3m$ where m is an arbitrary integer and k is the integer being incremented/changed during induction. \\
+
+            \textbf{Base case} (n = 1) \\
+            $2^1 + 1 = 3$ \\
+            $3 * 1 = 3$, 3 is divisible by 3 \\
+
+            \textbf{Inductive hypothesis} (n = k) \\
+            Assume for all odd integer n, $3 \vert 2^n + 1$ \\
+            or $\forall k \in \mathbb{Z}^{+} (\exists m \in \mathbb{Z}^{+}(2^{2k + 1} + 1 = 3m))$
+
+            \textbf{Inductive step} (n = k + 1) \\
+            $2^{2(k+1) + 1} + 1 = 2^{2k + 2 + 1} + 1$ \\
+            $2^{2k + 3} + 1 = 4 * 2^{2k+ 1} + 1$ \\
+            $2^{2k + 3} + 1 = 4 * 2^{2k+1} + 1$ \\
+            Since $2^{2k + 1} + 1 \equiv_3 0$ then $2^{2k + 1} \equiv_3 2$ \\
+            $2^{2k + 3} + 1 \equiv 2 * 4 + 1 (\mod 3)$ \\
+            $2^{2k + 3} + 1 \equiv 3 * 3 (\mod 3)$ \\
+            $2^{2k + 3} + 1 \equiv 0 (\mod 3)$ \\
+
+            \textbf{Conclusion} \\
+            By induction, we have shown that the proposition holds for n = 1, n = k, and n = k + 1. Therefore, by induction the proposition is true for all $n \in \mathbb{Z}_+$ QED. \\
+        \end{solution}
+    \end{problem}
+
+
+    \newpage
+
+    \begin{problem}
+
+        Consider the following proof by induction: \\
+
+        Proof: Let $P(n)$ by the claim that $f_n \geq (3/2)^{n-2}$ where $f_n$ is the $n^{th}$ Fibonacci number. We will show that $P(n)$ holds for all $n \in \mathbb{Z}_+$. \\
+
+        Base case: \textbf{A} \\
+
+        Inductive hypothesis: Let $k \geq 2$ be arbitrarily chosen and suppose $P(n)$ is true for all $n = 1, 2, . . . , k$. \\
+
+        Inductive step: The.
+
+        \begin{align*}
+            f_{k+1} &= f_k + f_{k-1} & \textbf{B} \\
+            &\geq (3/2)^{k-2} + (3/2)^{k-3} & \textbf{C} \\
+            &= (3/2)^{k-1}((3/2)^{-1} + (3/2)^{-2}) & \textbf{D} \\
+            &= (3/2)^{k-1}(\frac{2}{3}+\frac{4}{9}) & \\
+            &= (3/2)^{k-1}(\frac{10}{9}) > (3/2)^{k-1} \\
+        \end{align*}
+
+        Thus, $P(n)$ holds for $n = k + 1$, and the proof of the induction step is complete.
+        By the principle of induction, it follows that $P(n)$ is true for all $n \in \mathbb{Z}_+$
+
+        \subproblem For what value(s) of $n$ are base cases needed? Justify your answer. You need not prove the base case(s).
+        \subproblem What justification goes in location B?
+        \subproblem What justification goes in location C?
+        \subproblem What justification goes in location D?
+
+        \begin{solution}
+        (A) \\
+        The base cases needed include (n = 1), (n = 2), (n = 3). Proof by induction requires the smallest possible base(because all inputs larger than the base will be proved to be true), however in this case multiple are required in order to cover the potentially strange behaviour of exponents when they are negative, zero, and positive. The n = 1 case will cover an exponent of -1, n=2 will cover an exponent of zero, and n=3 will cover a case for when the exponent is positive ( all the remaining integers). \\
+
+        (B) \\
+        We know $f_{k+1} = f_k + f_{k-1}$ as a result of the Fibonacci sequence's definition $f_n = f_{n-1} + f_{n-2}$ or alternatively $f_{n+1} = f_{n} + f_{n-1}$ if you increment all the indices.
+
+        (C) \\
+        We know $ f_k \ge \left( \frac{3}{2} \right)^{k-2} \quad \text{and} \quad f_{k-1} \ge \left( \frac{3}{2} \right)^{k-3} $ to be true because they are the the definitions of the inductive hypothesis (and the inductive hypothesis is assumed to be true for $n = 1, 2, \cdots, k$) for k and k-1. Therefore this allows us to establish that $f_{k+1} = f_k + f_{k-1} \ge \left( \frac{3}{2} \right)^{k-2} + \left( \frac{3}{2} \right)^{k-3}$. \\
+        We do this to create a form which is flexible and can be rewritten and worked with. \\
+
+        (D) \\
+        "Product of powers rule" allows to factor exponents and in our case factor out $\frac{3}{2}^{k - 1}$. We do this to create a form which we can simplify (by isolating constants).
+        \end{solution}
+    \end{problem}
+
+
+    \newpage
+
+\end{document}
