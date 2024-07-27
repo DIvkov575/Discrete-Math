@@ -107,5 +107,99 @@
     \end{problem}
     \newpage
 
+    \begin{problem}
+        We can use perturbation to generate a big cancellation of terms and a closed form for the series $S_n$:
+
+        \begin{align*}
+            S_n &= 1 + z + z^2 + \cdots z^n \\
+            zS_n &= z + z^2 + z^3 + \cdots + z^{n+1} \\
+            S_n - zS_n &= 1 + z^{n+1} \\
+            S_n &= \frac{1 - z^{n+1}}{1 - z}
+        \end{align*}
+
+        Use this same trick to generate a closed form for the series $T_n$:
+
+        \begin{align*}
+            T_n = 1z + 2z^2 + 3z^3 + \cdots + nz^n
+        \end{align*}
+
+        \begin{solution}
+            $ T_n = 1z + 2z^2 + 3z^3 + \cdots + nz^n$ \\
+            $ zT_n = z^2 + 2z^3 + 3z^4 + \cdots + nz^{n+1}$ \\
+            $ \frac{1}{z}T_n = 1 + 2z + 3z^2 + \cdots + nz^{n-1}$ \\
+            $ \frac{1}{z}T_n - T_n = 1 + z + z^2 + \cdots + z^{n-1} - nz^n$ \\
+            $T_n - zT_n = z + z^2 + z^3 + \cdots + z^n - nz^{n+1}$ \\
+            $\frac{1}{z}T_n - T_n - T_n - zT_n = 1 - nz^n - z^n + nz^n+1$ \\
+            $T_n = \frac{1 - nz^n - z^n + nz^n+1}{\frac{1}{z} - 2 + z}$ \\
+        \end{solution}
+    \end{problem}
+    \newpage
+
+    \begin{problem}
+        Find a simple closed form for the series (where here $|p| < 1$)
+        $$\sum\limits_{x = 0}^{\infty} \sum\limits_{y = 0}^{\infty} p^{x+y}.$$
+
+        Do the same for
+        $$\sum\limits_{x = 0}^{\infty} \sum\limits_{y = 0}^{\infty}
+        \sum\limits_{z = 0}^{\infty} p^{x+y+z}.$$
+
+        \begin{solution}
+
+            \(\sum_{x=0}^{\infty} \sum_{y=0}^{\infty} p^{x+y}\). \\
+
+
+            The inner sum is a geometric series with the first term 1 and the common ratio \( p \), which converges because \(|p| < 1\): \(\sum_{y=0}^{\infty} p^y = \frac{1}{1 - p}\).
+
+            Therefore, the sum becomes: \(\sum_{x=0}^{\infty} p^x \left( \frac{1}{1 - p} \right) = \frac{1}{1 - p} \sum_{x=0}^{\infty} p^x\).
+
+            The outer sum is also a geometric series with the first term 1 and the common ratio \( p \), which converges for \(|p| < 1\): \(\sum_{x=0}^{\infty} p^x = \frac{1}{1 - p}\).
+            Therefore, we have: \(\sum_{x=0}^{\infty} \sum_{y=0}^{\infty} p^{x+y} = \frac{1}{1 - p} \cdot \frac{1}{1 - p} = \frac{1}{(1 - p)^2}\). \\
+
+            (A) $\frac{1}{(1-p)^2}$ \\
+
+            \(\sum_{x=0}^{\infty} \sum_{y=0}^{\infty} \sum_{z=0}^{\infty} p^{x+y+z}\). \\
+
+            For fixed \( x \) and \( y \), the innermost sum is: \(\sum_{z=0}^{\infty} p^{x+y+z}\).
+
+            Since \( p^{x+y+z} = p^x \cdot p^y \cdot p^z \), we can factor out \( p^x \cdot p^y \) from the innermost sum: \(\sum_{z=0}^{\infty} p^{x+y+z} = p^x \cdot p^y \sum_{z=0}^{\infty} p^z\).
+
+            The innermost sum is a geometric series with the first term 1 and the common ratio \( p \), which converges for \(|p| < 1\): \(\sum_{z=0}^{\infty} p^z = \frac{1}{1 - p}\).
+
+            Thus, the triple sum becomes: \(\sum_{x=0}^{\infty} \sum_{y=0}^{\infty} p^x \cdot p^y \left( \frac{1}{1 - p} \right) = \frac{1}{1 - p} \sum_{x=0}^{\infty} \sum_{y=0}^{\infty} p^x \cdot p^y\).
+
+            We already know that: \(\sum_{y=0}^{\infty} p^y = \frac{1}{1 - p}\), so the double sum becomes: \(\sum_{x=0}^{\infty} p^x \left( \frac{1}{1 - p} \right) = \frac{1}{1 - p} \sum_{x=0}^{\infty} p^x = \frac{1}{1 - p} \cdot \frac{1}{1 - p}\).
+
+            Therefore, we have: \(\sum_{x=0}^{\infty} \sum_{y=0}^{\infty} \sum_{z=0}^{\infty} p^{x+y+z} = \frac{1}{1 - p} \cdot \frac{1}{1 - p} \cdot \frac{1}{1 - p} = \frac{1}{(1 - p)^3}\).
+
+            (B) $\frac{1}{(1-p)^3}$
+        \end{solution}
+    \end{problem}
+    \newpage
+
+    \begin{problem}
+
+        Rebecca spends \$10 in expenses to start a side hustle that brings in \$40 in the first month. She re-invests 10 dollars of her profit from the previous month into her business on the 1st of each month. Through her hard work, her (gross) earnings each month are double the net profit from the previous month.
+
+        \subproblem Based on the above, Rebecca's earnings in the first and second month are $T(1) = 30$ and $T(2) = 50$, respectively. What are Rebecca's profits in the third and fourth month? Show your work.
+        \subproblem Write a recurrence for Rebecca's net earnings. Write both the base case $T(1)$ and the recursive case $T(n)$, where $n$ is the month.
+        \subproblem Solve the recurrence. Show your work.
+
+
+        \begin{solution}
+        (A) \\
+        $t(3) = 2 * t(2) - 10 = 2 * 50 - 10 = 90$ \\
+        $t(4) = 2 * t(3) - 10 = 2 * 90 - 10 = 170$ \\
+
+        (B) \\
+        $T(1) = 30; T(n) = 2 \dot T(n-1) - 10$ (for $n \geq 2$) \\
+
+        (C) \\
+        Recurrence recurses to a depth of $n$ because w/ each recursion we decrement the argument to T by 1. $n - n + 1 = 1$ therefore we will call n recurrences. \\
+        $T(n) = 2^{n}T(n-n+1) + 2^0{10} + 2^1{10} + \cdots + 2^{n}10$\\
+        $T(n) = 2^{n}30 + 10\sum{2^i}_{i=0}^{n}$
+
+
+        \end{solution}
+    \end{problem}
 
 \end{document}
