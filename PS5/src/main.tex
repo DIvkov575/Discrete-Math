@@ -159,4 +159,185 @@
 
     \newpage
 
+    \begin{problem}
+        Using induction, show that any square can be subdivided into $n$ squares, where $n > 5$ and $n \in \Nat$. For example, the large square below has been subdivided into 6 squares.
+
+        \begin{center}
+            \begin{tikzpicture}
+
+                \draw (0,0) -- (3,0) -- (3,3) -- (0,3) -- (0,0);
+                \draw (2,0) -- (2,2) -- (0,2);
+                \draw (1,2) -- (1,3);
+                \draw (2,2) -- (2,3);
+                \draw (2,1) -- (3,1);
+                \draw (3,2) -- (2,2);
+
+            \end{tikzpicture}
+        \end{center}
+
+        \textit{Hint: First show that any square subdivided into $k$ squares can easily be subdivided into $k+3$ squares, then think how many base cases you need to show are true.}
+
+        \begin{solution}
+            Let us prove show that any square can be subdivided into $n$ squares, where $n > 5$ and $n \in \Nat$ by induction. \\
+
+            \textbf{Base Case} (n = 6) and (n = 7) \\
+
+            Case: n = 6  \\
+            \begin{tikzpicture}
+                \draw (0,0) -- (3,0) -- (3,3) -- (0,3) -- (0,0);
+                \draw (2,0) -- (2,2) -- (0,2);
+                \draw (1,2) -- (1,3);
+                \draw (2,2) -- (2,3);
+                \draw (2,1) -- (3,1);
+                \draw (3,2) -- (2,2);
+            \end{tikzpicture} \\
+
+            Case: n = 7 \\
+            \begin{tikzpicture}
+                \draw (0,0) -- (4, 0) -- (4, 4) -- (0, 4) -- (0,0);
+                \draw (0,2) -- (4,2);
+                \draw (2,0) -- (2,4);
+                \draw (1,0) -- (1,2);
+                \draw (0,1) -- (2,1);
+            \end{tikzpicture} \\
+
+            Case: n = 8 \\
+            \begin{tikzpicture}
+                \draw (0,0) -- (4,0) -- (4,4) -- (0,4) -- (0,0);
+                \draw (1,0) -- (1,4);
+                \draw (0,1) -- (4,1);
+                \draw (2,1) -- (2,0);
+                \draw (3,1) -- (3,0);
+                \draw (0,2) -- (1,2);
+                \draw (0,3) -- (1,3);
+            \end{tikzpicture}
+
+            \textbf{Inductive hypothesis} \\
+            Assume that a square can be represented with $k$ subdivisions \\
+
+            \textbf{Inductive Step} \\
+            Case 1: (k is even) \\
+            If k is an even integer, the square can be represented in a form similar to that of (base case) n = 6, however instead of having one side consisting of 3 squares, it consists of k/2 squares (See Figure 1).
+
+            In order to represent k + 1, decrement the number of boxes on two of its edges (ie given a square in the form of base case n = 6, update the square to be in a similar form however instead of each of the two sides having k/2 squares, update them to have k/2 - 1 squares or k-2 divisions for in total (See Figure 1). Then proceed to divide any of the squares into into 4 (See figure 2).
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.5\linewidth, angle=90]{IMG_4025.JPG}
+                \caption{form equivalent to base case n=6, however containing an side length of k/2 squares and k divisions total. }
+                \label{fig:enter-label}
+            \end{figure}
+
+
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \draw (0,0) -- (4,0) -- (4,4) -- (0,4) -- (0,0);
+                    \draw (6,0) -- (10,0) -- (10,4) -- (6,4) -- (6,0);
+                    \draw (8,0) -- (8,4);
+                    \draw (6,2) -- (10,2);
+                \end{tikzpicture}
+                \caption{Dividing a division/square into 4 subdivision aka creating 3 new division (k+3)}
+            \end{figure}
+
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \draw (0,0) -- (4,0) -- (4,4) -- (0,4) -- (0,0);
+                    \draw (1,0) -- (1,4);
+                    \draw (0,1) -- (4,1);
+                    \draw (2,1) -- (2,0);
+                    \draw (3,1) -- (3,0);
+                    \draw (0,2) -- (1,2);
+                    \draw (0,3) -- (1,3);
+                \end{tikzpicture}
+                \begin{tikzpicture}
+                    \draw (0,0) -- (3,0) -- (3,3) -- (0,3) -- (0,0);
+                    \draw (1,0) -- (1,3);
+                    \draw (0,1) -- (3,1);
+                    \draw (2,1) -- (2,0);
+                    \draw (0,2) -- (1,2);
+                \end{tikzpicture}
+                \caption{Creating/removing 2 subdivisions (k+2)}
+            \end{figure}
+
+            Case 2: (k is odd) \\
+            If k is an odd integer, the square can be represented in the form shown in figure 4 (a composition of the outlined in figure 1 and figure 2.
+            In order to subdivide a square into k+1 subdivisions, given a representation of k in the form described above, we can remove the divisions highlighted in red (in figure 4) (giving us a representation of k-3), then increment the divisions of each on each side by 2 (so what was previously $(k-3)/2$ becomes $(k-3)/2 + 2)$), increasing the total number of subdivisions by 4 in the process (giving us k+1 subdivision). \\
+
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.5\linewidth]{IMG_4026.JPG}
+                \caption{Representation of an odd number of subdivision}
+                \label{fig:enter-label}
+            \end{figure}
+
+            \textbf{Conclusion} \\
+            Given the assumption that a square can be divided into k square subdivisions, we have shown that through two cases (an odd and an even k) which can be represented as either in the form shown in figure 1 or the form shown in figure 4 (a combination of the forms in figure 1 and 2). If a square's k subdivisions is odd, it can be represented in a form similar to 4, meaning it contains a division shown in figure 2 (highlighted in red in figure 4), which can be removed. After removing this division (giving us k-3) we can create 2 subdivisions twice (operation represented in figure 3), in order it give us a total of k+1 subdivisions. However if the square contained an even k subdivisions, we can represent in in form represented in figure 1 (containing the edges lined with squares). In order to attain k+1 subdivisions we must decrement the number of squares lining two of the edges (the reverse of the operation outlined in figure 3), then subdivide any of the squares into 4 subdivisions (operation shown in future 2) (increasing the subdivision count by 3) giving us a total of k+1 subdivisions. $\qedsymbol$
+
+            Note. The reasoning applies for k after the base case k = 8, because k=8 can be represented in a form with sufficient square subdivisions lining two of its edges such that the number can be decremented (operation in figure 3).  Use base cases for $k < 8$. \\
+        \end{solution}
+    \end{problem}
+    \newpage
+
+    \begin{problem}
+        The Tribonacci numbers are defined by $T_0 = 1, T_1 = 1, T_2 = 2$, and $T_n = T_{n_1} + T_{n-2} + T_{n-3}$ for all $n \ge 3$. The beginning of the Tribonacci sequence is $1, 1, 2, 4, 7, 13, ...$.
+
+        \subproblem Use strong induction to prove that $T_n \le 3^n$ for all natural numbers $n$.
+
+        \subproblem Use strong induction to prove that any positive integer can be written as the sum of one or more \textit{distinct} Tribonacci numbers. For example, $3 = T_0 + T_2$, and $9 = T_0 + T_1 + T_4$. (Hint: consider the greatest $T_k$ less than $n+1$. Can you add other Tribonacci numbers to $T_k$ to reach $n+1$?)
+
+        \begin{solution}
+        (A) \\
+        Let us prove with strong induction that $T_n \le 3^n$ for all natural numbers $n$.
+
+        \textbf{Base Case} \\
+        For n = 0, $T_0 = 1 \leq 3^0 = 1$: Case holds\\
+        For n = 1, $T_1 = 1 \leq 3^1 = 3$: Case holds \\
+        For n = 2, $T_2 = 1 \leq 3^2 = 9$: Case holds \\
+
+        \textbf{Induction Hypothesis} \\
+        According to strong induction we assume $T_k \leq 3^k$ for all natural number k less than or equal to n \\
+        Therefore we can assume $T_n \leq 3^n, \quad T_{n-1} \leq 3^{n-1}, \quad T_{n-2} \leq 3^{n-2}$ \\
+
+        \textbf{Induction step} \\
+        Since $T_n \leq 3^n, \quad T_{n-1} \leq 3^{n-1}, \quad T_{n-2} \leq 3^{n-2}$ and $T_n = T_{n_1} + T_{n-2} + T_{n-3}$ we can sum the inequalities to achieve
+        $T_{n+1} \leq 3^n + 3^{n-1} + 3^{n-2}$ \\
+        $T_{n+1} \leq 3^{n-2} (3^2 + 3^1 + 3^0)$: factor out $3^{n-2}$ \\
+        $T_{n+1} \leq 3^{n-2} * 13$ \\
+
+        Now, $3^n \leq 3^{n-2} * 13$ because multiplying $3^{n-2}$ by 13 is less than multiplying $3^{n-2}$ by 9. Therefore, by  strong induction, $T_n \leq 3^n$ holds for all $n \geq 0$ \qedsymbol \\
+
+        (B) \\
+        Let us use strong induction to prove that any positive integer can be written as the sum of one or more \textit{distinct} Tribonacci numbers. \\
+
+        \textbf{Base case} \\
+        (n = 1): \\
+        $1 = T_1$ \\
+
+        (n = 2): \\
+        $2 = T_2$ \\
+
+        (n = 3): \\
+        $3 = T_3$ \\
+
+        \textbf{Induction hypothesis} \\
+        Assume for all k where $1 \leq k \leq n$, each k an can be expressed as a sum of distinct Tribonacci numbers.
+
+        \textbf{Induction Step} \\
+        First we must find the largest Tribonacci number \( T_m \) such that \( T_m \leq n+1 \), then consider the number \( n+1 - T_m \).
+
+        By the induction hypothesis, since \( n+1 - T_m \leq n \), \( n+1 - T_m \) can be expressed as a sum of distinct Tribonacci numbers. Therefore, we can write: $n+1 = T_m + (n+1 - T_m) $
+
+        Since \( n+1 - T_m \) is expressible as a sum of distinct Tribonacci numbers by the induction hypothesis, and \( T_m \) is distinct from these numbers, \( n+1 \) is can also be expressed as a sum of distinct Tribonacci numbers.
+
+        \textbf{Conclusion}
+        By strong mathematical induction, we have shown that any positive integer \( n \) can be written as the sum of one or more distinct Tribonacci numbers \qedsymbol
+
+
+        \end{solution}
+    \end{problem}
+
+
 \end{document}
