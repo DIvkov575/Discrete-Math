@@ -1,0 +1,82 @@
+\documentclass[solution,letterpaper]{cs20}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{hyperref}
+\usepackage{multicol}
+\begin{document}
+\header{8}{Asymptotics Counting Counting Subsets}
+\begin{problem}
+Rank the following functions by their rate of growth, from slowest to fastest.
+Specifically, you should rank $f(x)$ after $g(x)$ iff $g(x)=o(f(x))$. Please
+indicate the ranking by using the numbers for each function below. If multiple
+functions grow asymptotically at the same rate, group their numbers in brackets.
+For example, your answer might look like this: 5,2,7,\{3,4\},8,1,9,\{6,10,11\},12.
+\begin{multicols}{2}
+\begin{enumerate}
+\item $10^x$
+\item $2^{4x}$
+\item $4^{2x}$
+\item $e^x$
+\item $x^{10}$
+\item $x!$
+\item $x^x$
+\item $5$
+\item $\log(x)$
+\item $1/x$
+\item $x$
+\item $\displaystyle \sum^{10}_{n=0} nx^n$
+\item $\displaystyle \sum^{10}_{n=0} n^n$
+\end{enumerate}
+\end{multicols}
+\begin{solution}
+10, \{13, 8\}, 9, 11, \{5, 12\}, 4, 1, \{2,3\}, 6, 7
+\end{solution}
+\end{problem}
+\newpage
+
+\begin{problem}
+Suppose $f,g,h$ are strictly increasing functions from the positive
+integers to the positive integers. Prove that if $f(n)$ is $O(g(n))$
+then $f(h(n))$ is $O(g(h(n)))$. \\
+\begin{solution}
+Since \( f(n) \) is \( O(g(n)) \), by definition, there exist constants \( c > 0 \) and \( n_0 \) such that for all \( n \geq n_0 \), \( f(n) \leq c \cdot g(n) \).
+
+We need to show that \( f(h(n)) \) is \( O(g(h(n))) \) i.e. there exist constants \( c' > 0 \) and \( n_1 \) such that for all \( n \geq n_1 \), \( f(h(n)) \leq c' \cdot g(h(n)) \).
+
+Given \( f(n) \leq c \cdot g(n) \) for \( n \geq n_0 \), we substitute \( n \) with \( h(n) \). Since \( h \) is a strictly increasing function from the positive integers to the positive integers, \( h(n) \) will eventually be greater than or equal to \( n_0 \) for sufficiently large \( n \). Let \( n_1 \) be such that \( h(n) \geq n_0 \) for all \( n \geq n_1 \). Such an \( n_1 \) exists because \( h \) is strictly increasing and maps positive integers to positive integers. \\
+For all \( n \geq n_1 \), \( h(n) \geq n_0 \). \\
+Thus, for \( n \geq n_1 \), \( f(h(n)) \leq c \cdot g(h(n)) \). \\
+Let \( c' = c \). Then, \( f(h(n)) \leq c' \cdot g(h(n)) \) for all \( n \geq n_1 \). \\
+This shows that \( f(h(n)) \) is \( O(g(h(n))) \) with constants \( c' = c \) and \( n_1 \)\\
+\end{solution}
+\end{problem}
+\newpage
+
+
+\begin{problem}
+Recall that for functions $f$, $g$ on $\mathbb{N}$, $f = O(g)$ iff
+\[\exists c \in \mathbb{N}, \exists n_0 \in \mathbb{N}, \forall n \geq n_0\;\;\;c \cdot g(n) \geq |f(n)| \]
+For each pair of functions below, determine:
+\begin{enumerate}
+\item whether $f = O(g)$,
+\item whether $g = O(f)$,
+\item in cases where a function is $O$ of the other, indicate the \emph{smallest
+nonnegative integer} $c$ and for that smallest $c$, the \emph{smallest
+corresponding nonnegative integer} $n_0$ ensuring that the condition above is met,
+\item in cases where a function is not $O$ of the other, a justification for why
+not.
+\end{enumerate}
+\subproblem $f(n) = n^2$ and $g(n) = 3n$
+\subproblem $f(n) = \frac{3n-7}{n + 4}$ and $g(n) = 4$
+\subproblem $f(n) = 1 + (n\sin(n\frac{\pi}{2}))^2$ and $g(n) = 3n$ \\
+\begin{solution}
+(A)  1) False 2) True) 3) $c=1,  n_0 = 2$ \\
+(B)  1) True 2) True) 3) $c=2, n_0 = 16$ \\
+(C)  1) False 2) False 3) f(n) and g(n) are neither 'O' or '$\Omega$' of each other because of f's oscillating nature. As $n$ increases, $f$ will always oscillate between $n^2$ (larger than $n$) and zero, thereby never reaching a point from where on it will always be less than or greater than $g$. For this same reason, using the provided formula (comparing $\lim_{n \to \infty}{\frac{f(n)}{g(n)}}$for analysis is impossible because the function will never converg as $n$ approaches $\infty$.
+
+\end{solution}
+\end{problem}
+\newpage
+
+\end{document}
