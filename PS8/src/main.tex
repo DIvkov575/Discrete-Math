@@ -79,4 +79,66 @@ not.
 \end{problem}
 \newpage
 
+\begin{problem}
+    Let $S$ be the set of all 5-digit natural numbers that start with 2 \texttt{1}s or
+    end in 2 \texttt{0}s, with no leading zeros. Use the inclusion-exclusion principle
+    and the product rule to determine the cardinality of $S$.
+    \begin{solution}
+        let $S_1$ be the set of 5-digit natural numbers starting with 2 1s \\
+        let $S_2$ be the set of 5-digit natural numbers ending in 2 0s with no leading zeros\\
+        let $S_3$ be the set of 5-digit natural numbers starting with 2 1s, and ending in two zeros \\
+        By the inclusion-exclusion principle $|S| = |S_1| + |S_2| - |S_3|$ \\
+
+        Where $x \in \{1, 0\}$ \\
+        let $S_1$ be represented by sequence $\{1,1,x_1, x_2, x_3\}$. Since $x_1, x_2, x_3$ can be 1 of 2 options there are $n^k \text{ or } 2^3$ choices. Therefore, $|S_1| = 8$. \\
+        let $S_2$ be represented by sequence $\{1,x_1, x_2, 0, 0\}$. Since $x_1, x_2$ can be 1 of 2 options there are $n^k \text{ or } 2^2$ choices. Therefore, $|S_2| = 4$. \\
+        let $S_3$ be represented by sequence $\{1,1, x_2, 0, 0\}$. Since $x_1$ can be 1 of 2 options there are $n^k \text{ or } 2^1$ choices. Therefore, $|S_2| = 2$. \\
+
+        $|S| = 8 + 4 - 2 = 10$ \\
+        Therefore, there are 10 strings consisting of 5-digit natural numbers that start with 2 \texttt{1}s or that end in 2 \texttt{0}s, with no leading zeros. \\
+    \end{solution}
+\end{problem}
+\newpage
+
+\begin{problem}
+    How many solutions are there to the equation $x_1+x_2+x_3+x_4=10$
+    when all of the variables must be non-negative integers.
+
+    \begin{solution}
+        To solve the equation \( x_1 + x_2 + x_3 + x_4 = 10 \) where all variables \( x_1, x_2, x_3, \) and \( x_4 \) must be non-negative integers, we can visualize the problem by considering the number 10 as a collection of 10 ones. These ones need to be divided into 4 groups ("bins"), where each group represents one of the variables \( x_1, x_2, x_3, \) and \( x_4 \).
+        This can be calculated using combinations: \( \binom{n + k - 1}{k - 1} \), where \( n \) is the total number of ones (10 in this case) and \( k \) is the number of bins (4 in this case). \\
+        Substituting the values into the formula, we get: \( \binom{10 + 4 - 1}{4 - 1} = \binom{13}{3} \). \\
+        \( \binom{13}{3} = \frac{13!}{3!(13-3)!} = \frac{13!}{3! \cdot 10!}  = 286\) \\
+        Therefore, the number of non-negative integer solutions to the equation \( x_1 + x_2 + x_3 + x_4 = 10 \) is 286. \\
+    \end{solution}
+\end{problem}
+\newpage
+
+\begin{problem}
+    Consider functions of the form $f : \{1,2,3,4\} \to \{1,2,3,4,5,6\}$.
+    \subproblem How many total functions are possible? Explain briefly.
+    \subproblem How many of these functions are injective? Explain briefly.
+    \subproblem If an injective function is selected at random, what is the probability
+    (expressed as a fraction in lowest terms) that the functions is increasing? To be
+    increasing means that if $a < b$ then $f(a)< f(b)$ or in other words, the outputs
+    get larger as the inputs get larger. Explain briefly.
+    \begin{solution}
+    (A) \\
+    $6^4 = 1296$ because each element from domain can be mapped to one of the 6 co-domain elements. Since elements can be mapped to multiple times, and every elem in domain is mapped, the total becomes ${| \text{co-domain} |}^{| \text{domain} |}$ \\
+
+    (B) \\
+    An injective total function is one where every elem in the co-domain is mapped to at most one times and every elem in domain is mapped from.
+    The number of injective functions from \( \{1, 2, 3, 4\} \) to \( \{1, 2, 3, 4, 5, 6\} \) is equal to the number of ways of selecting sets of 4 ordered elements from the co-domain. The selected sets represents the co-domain elements being mapped to, while the order is relevant because it makes the mapping domain element significant. \\
+    $\frac{6!}{(6-4)!} = 6 * 5 * 4 * 3 = 360$ \\
+
+    (C) \\
+    The number of such subsets that map \( \{1, 2, 3, 4\} \) to any subset of \( \{1, 2, 3, 4, 5, 6\} \) of size 4, where the elements are in increasing order is can be found by choosing
+    4 elements from \( \{1, 2, 3, 4, 5, 6\} \) and then arrange them in increasing order. Since the problem cares only about a strict ordering and our functions are total and injective, there will only be one order per subset. \\
+    The number of unordered subsets (size 4) of 6 elements is $\binom{6}{4} = \frac{6!}{(4!)(2!)} = 6*5/2 = 15$ therefore there are 15 total injective functions which map in an increasing order \\
+    The total number of total injective functions is 360 \\
+    Therefore the probability of choosing a function with a strictly increasing output ordering, is $\frac{15}{360} = \frac{1}{24}$ \\
+
+
+    \end{solution}
+\end{problem}
 \end{document}
