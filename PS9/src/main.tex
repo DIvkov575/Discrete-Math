@@ -1,0 +1,158 @@
+
+\documentclass[solution,letterpaper]{cs20}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{float}
+
+\begin{document}
+
+    \header{9}{Probability Conditional Probability Bayes Rule Random Variables and Expectation}
+
+
+    \begin{problem}
+        The most simple error-correction code is a repetition code.
+        Suppose I want to send you a bit -- either a 0, or a 1.
+        But there is a probability $p$ that the bit will get flipped
+        when I transmit it.  So I instead send $2k+1$ copies of the bit,
+        and you use the majority response for the transmitted bit.
+        So if you receive $00110$, you would assume I sent a 0.
+        Suppose each bit is flipped independently with probability $p=0.02$.
+        Find the smallest value of $k$ so that you end with an erroneous bit
+        with probability less than 1 in a million. Show your work.
+
+        \begin{solution}
+            An erroneous bit flip occurs when $k+1$ (out of the $2k + 1$ bits) of the message flip. We are trying to determine the number of bits necessary such that the P($k+1$ bits flipped) is less than 1 in a million. \\
+            P($k+1$ bits flipped) $\leq 10^{-6}$ \\
+            $\text{P(bit flip)}^{k+1} \leq 10^{-6}$ \\
+            $0.02^{k+1} \leq 10^{-6}$ \\
+            $k+1 \geq \log_{0.02}{10^{-6}}$\\
+            $k \geq 2.532$ \\
+            Since probability must be less than $10^{-6}$, the min value of k is 3.
+        \end{solution}
+    \end{problem}
+    \newpage
+
+    \begin{problem}
+        A bag contains two coins: one coin is a standard fair coin, the other
+        has heads on both sides.
+
+        \subproblem Your friend picks a coin from the bag
+        uniformly at random, and then flips it twice, resulting in two heads.
+        If you say that the coin is the two-headed coin, what is
+        the probability that you are wrong?
+        \subproblem Now generalize your result;  if your friend picks a coin from the bag
+        uniformly at random, and then flips it $k$ times, resulting in $k$ heads,
+        what is the probability you would be wrong if said that the chosen coin was
+        the two-headed coin?
+
+        \begin{solution}
+
+            \tikzstyle{level 1}=[level distance=3.5cm, sibling distance=4cm]
+            \tikzstyle{level 2}=[level distance=3.5cm, sibling distance=3cm]
+            \tikzstyle{level 3}=[level distance=3.5cm, sibling distance=2cm]
+            \tikzstyle{bag} = [text width=4em, text centered]
+            \tikzstyle{end} = [text, minimum width=3pt,inner sep=0pt]
+
+            \begin{tikzpicture}[grow=right, sloped]
+                \node[bag] {Coin type}
+                child {
+                    node[bag] {1 Headed Coin (0.5)}
+                    child {
+                        node[bag] {Heads (1.)}{
+                            child {
+                                node[end] {Heads (1.)(0.5)}
+                            }
+                        }
+                    }
+                }
+                child {
+                    node[bag] {2 Headed Coin (0.5)}
+                    child {
+                        node[bag] {Heads (0.5)} {
+                            child {
+                                node[end] {Heads (0.5)(0.125)}
+                            }
+                            child {
+                                node[end] {Tails(0.5)(0.125)}
+                            }
+                        }
+                    }
+                    child {
+                        node[bag] {Tails(0.5)} {
+                            child {
+                                node[end] {Heads (0.5)(0.125)}
+                            }
+                            child {
+                                node[end] {Tails(0.5)(0.125)}
+                            }
+                        }
+                    }
+                };
+            \end{tikzpicture}
+
+            (A) \\
+            The probability that I am wrong would be the probability of two Head flips results from a fair coin being flipped twice. $\frac{\frac{1}{8}}{\frac{1}{8} + \frac{1}{2}} = \frac{1}{5}$ \\
+            (B) \\
+            $\frac{\frac{1}{2}^{k-1}}{\frac{1}{2}^{k-1} + \frac{1}{2}}$ \\
+        \end{solution}
+    \end{problem}
+    \newpage
+
+
+    \begin{problem}
+        \subproblem One simple type of spam filter uses what are called naive Bayes classifiers,
+        which use Bayesian inference to calculate a probability (estimate)
+        that an email is spam or not.  Suppose that an email contains the word
+        FREE.  This may be a sign that the mail is spam.
+
+        Let $S$ be the event that a new email is spam, and let $F$ be the event
+        than a new email contains the word FREE.  Given enough data, we calculate
+        (estimates) for $Pr(S)$ (the overall probability a new message is spam),
+        $Pr(F~|~S)$ (the probability the word FREE appears in a spam message),
+        and
+        $Pr(F~|~\neg S)$ (the probability the word FREE appears in a message
+        that is not spam).  Give a formula for
+        $Pr(S~|~F)$, the probability a message is spam given the word FREE appears
+        in it, in terms of these above quantities.
+
+        Supose we have
+        $Pr(S) = 0.01$,
+        $Pr(F~|~S) = 0.05$
+        $Pr(F~|~\neg S) = 0.001$.
+        Use your formula to calculate $Pr(S~|~F)$.
+
+
+        \subproblem
+        (Bonus, you do not need to turn in, this is a bit harder.)  Naive Bayes classifiers actually use several the probability calculation for multiple words,
+        treating each word as independent, ignoring any correlation among words.
+        (This is why they are called naive.)
+        So suppose a naive Bayes classifer tests for the words FREE, PRIZE, BANK.
+        Let $P$ be the event than a new email contains the word PRIZE and $B$ be the event that a new email contains the word BANK.
+
+        Let us suppose we find the following quantities:
+
+        $Pr(S) = 0.01$, \\
+        $Pr(F~|~S) = 0.05$, \\
+        $Pr(F~|~\neg S) = 0.001$, \\
+        $Pr(B~|~S) = 0.04$, \\
+        $Pr(B~|~\neg S) = 0.002$, \\
+        $Pr(P~|~S) = 0.08$, \\
+        $Pr(P~|~\neg S) = 0.001$. \\
+
+        What would be the probability a naive Bayes classifier would give to a new email
+        being spam, if it contains all three words FREE BANK PRIZE.
+
+        \begin{solution}
+        (A) \\
+        $P(S~|~F) = \frac{P(F~|~S)P(S)}{P(F~|~S)P(S) + P(F~|~\neg S)P(\neg S)}$ \\
+        $P(S~|~F) = \frac{0.05 * 0.01}{0.05 * 0.01 + 0.001*(1-0.01)}$ = 0.3355704\\
+
+        \end{solution}
+    \end{problem}
+    \newpage
+
+
+\end{document}
